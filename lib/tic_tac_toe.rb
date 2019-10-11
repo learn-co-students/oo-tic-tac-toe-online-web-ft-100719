@@ -54,7 +54,6 @@ class TicTacToe
     puts "Where would you like to move? (Enter 1-9):"
     user_input = gets
     user_input = input_to_index(user_input)
-    # binding.pry
     if  valid_move?(user_input)
       token =  current_player
       move(user_input, token)
