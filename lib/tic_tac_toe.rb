@@ -46,7 +46,7 @@ class TicTacToe
 
 
   def valid_move?(input)
-    if !self.position_taken?(input) && input.between?(0,8)
+    if !position_taken?(input) && input.between?(0,8)
       return true
     end
   end
@@ -59,15 +59,15 @@ class TicTacToe
 
 
   def current_player
-    self.turn_count%2==0 ? "X" : "O"
+    turn_count%2==0 ? "X" : "O"
   end
 
 
   def turn
-    input=gets
-    index= self.input_to_index(input)
-    if self.valid_move?(index)
-      self.move(index, self.current_player)
+    input=gets.chomp
+    index= input_to_index(input)
+    if valid_move?(index)
+      move(index,current_player)
       display_board
     else
       turn
@@ -84,7 +84,7 @@ class TicTacToe
      position2 = @board[index1]
      position3 = @board[index2]
 
-     if position1 == position2 && position2 == position3
+     if position1 == position2 && position2 == position3 && (position1=="X" || position1=="O")
        return win_combo
      end
     end
@@ -115,12 +115,10 @@ class TicTacToe
       winners_combo = won?
     end
 
-    if @board[winners_combo[0]] == "X"
-        return "X"
-    elsif @board[winners_combo[0]] == "O"
+    if won? && @board[winners_combo[0]] == "X"
+      return "X"
+    elsif won? && @board[winners_combo[0]] == "O"
         return "O"
-    else !won? && full?
-      return nil
    end
   end
 
@@ -131,15 +129,14 @@ class TicTacToe
       turn
     end
 
-    if !over?
-      turn
-    elsif over? && won?
+
+    if over? && won?
       if winner=="X"
         puts "Congratulations X!"
-      else winner=="O"
+      elsif winner=="O"
         puts "Congratulations O!"
       end
-    else over? && draw?
+    elsif over? && draw?
         puts "Cat's Game!"
     end
   end#closes def play
