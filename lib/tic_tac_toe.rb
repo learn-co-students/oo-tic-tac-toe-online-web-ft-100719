@@ -13,7 +13,7 @@ class TicTacToe
   ]
 
   def initialize
-    @board = Array.new(9, " ")
+    @board = Array.new(9, ' ')
   end
 
   def display_row(row)
@@ -21,7 +21,7 @@ class TicTacToe
   end
 
   def display_line
-    puts "-----------"
+    puts '-----------'
   end
 
   def display_board
