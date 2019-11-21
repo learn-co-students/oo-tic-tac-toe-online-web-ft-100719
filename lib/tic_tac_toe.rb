@@ -51,4 +51,11 @@ class TicTacToe
   def current_player
     turn_count.even? ? "X" : "O"
   end
+  def turn
+    input=gets.strip
+    #binding.pry
+    position=input_to_index(input)
+    valid_move?(position)
+    current_player
+  end
 end
