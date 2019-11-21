@@ -26,36 +26,34 @@ class TicTacToe
     user_input.to_i-1
   end
 
-  def move(input1,input2)
-    @board[0]="X"
-    @board[4]="O"
-    @board
+  def move(index,token)
+    @board[index]=token
   end
 
   def position_taken?(position)
     @board[position]!=" "  #true : false
   end
+
   def valid_move?(position)
    !position_taken?(position) && position>=0 && position<=8
-    #if @board[position]=="X" || @board[position]=="O"
-       #false
-    #else
-      #true
-      #binding.pry
-      #position<=8
-    #end
   end
+
   def turn_count
     @board.count {|char| char !=" "}
   end
+
   def current_player
     turn_count.even? ? "X" : "O"
   end
+
   def turn
     input=gets.strip
-    #binding.pry
     position=input_to_index(input)
-    valid_move?(position)
-    current_player
+    if valid_move?(position)
+      move(position,current_player)
+      display_board
+    else
+      turn
+    end
   end
 end
